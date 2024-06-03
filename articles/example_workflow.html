@@ -122,30 +122,27 @@ ensured by recording the download link used and the access date.</p>
 release as a <code>.tar.gz</code> archive.</strong></p>
 <p>From your local desktop you can run the following R snippet to
 download the <code>v1.0.0</code> release of the package:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># download the v1.0.0 release as a .tar.gz archive</span></span>
+<pre><code><span><span class="co"># download the v1.0.0 release as a .tar.gz archive</span></span>
 <span><span class="co"># to your current directory</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html" class="external-link">download.file</a></span><span class="op">(</span><span class="st">"https://github.com/Leeds-CDRC/nutrientprofiler/archive/refs/tags/v1.0.0.tar.gz"</span>,</span>
-<span>              dest <span class="op">=</span> <span class="st">"./nutrientprofiler-v1.0.0.tar.gz"</span><span class="op">)</span></span></code></pre></div>
+<span>              dest <span class="op">=</span> <span class="st">"./nutrientprofiler-v1.0.0.tar.gz"</span><span class="op">)</span></span></code></pre>
 <p>Alternatively, this can be downloaded directly from the <a href="https://github.com/Leeds-CDRC/nutrientprofiler/releases" class="external-link">GitHub
 releases</a> page.</p>
 <p>A different release can be specified by changing the release tag.
 Make sure to also update the destination filename to prevent
 confusion:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># replace &lt;tag&gt; with the required version number</span></span>
+<pre><code><span><span class="co"># replace &lt;tag&gt; with the required version number</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html" class="external-link">download.file</a></span><span class="op">(</span><span class="st">"https://github.com/Leeds-CDRC/nutrientprofiler/archive/refs/tags/&lt;tag&gt;.tar.gz"</span>,</span>
-<span>              dest <span class="op">=</span> <span class="st">"./nutrientprofiler-&lt;tag&gt;.tar.gz"</span><span class="op">)</span></span></code></pre></div>
+<span>              dest <span class="op">=</span> <span class="st">"./nutrientprofiler-&lt;tag&gt;.tar.gz"</span><span class="op">)</span></span></code></pre>
 <p>If required, zip file archives are also available on the <a href="https://github.com/Leeds-CDRC/nutrientprofiler/releases" class="external-link">GitHub
 releases</a> page or can be downloaded using the following R script
 below. Please note that these <code>.zip</code> archives require a
 slightly different installation to <code>.tar.gz</code>; please read
 through the isntallation steps first.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># download the &lt;tag&gt; release as a zip archive</span></span>
+<pre><code><span><span class="co"># download the &lt;tag&gt; release as a zip archive</span></span>
 <span><span class="co"># to your current directory</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html" class="external-link">download.file</a></span><span class="op">(</span><span class="st">"https://github.com/Leeds-CDRC/nutrientprofiler/archive/refs/tags/&lt;tag&gt;.zip"</span>,</span>
-<span>              dest <span class="op">=</span> <span class="st">"./nutrientprofiler-&lt;tag&gt;.zip"</span><span class="op">)</span></span></code></pre></div>
+<span>              dest <span class="op">=</span> <span class="st">"./nutrientprofiler-&lt;tag&gt;.zip"</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="section level4">
 <h4 id="downloading-the-current-development-version-or-a-specific-branch">1.2 Downloading the current development version or a specific
@@ -160,11 +157,10 @@ identifier as the branch may be updated or changed following your
 download and installation.</strong></p>
 <p>For example, the following downloads the current package on the
 “VarEdits” branch of the repository:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># replace "tags/version-number" with "heads/branch-name":</span></span>
+<pre><code><span><span class="co"># replace "tags/version-number" with "heads/branch-name":</span></span>
 <span><span class="co"># in this example, we replaced "tags/v1.0.0" with "heads/VarEdits"</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html" class="external-link">download.file</a></span><span class="op">(</span><span class="st">"https://github.com/Leeds-CDRC/nutrientprofiler/archive/refs/heads/VarEdits.tar.gz"</span>,</span>
-<span>              dest <span class="op">=</span> <span class="st">"./nutrientprofiler-VarEdits.tar.gz"</span><span class="op">)</span></span></code></pre></div>
+<span>              dest <span class="op">=</span> <span class="st">"./nutrientprofiler-VarEdits.tar.gz"</span><span class="op">)</span></span></code></pre>
 <p>Again, a zip file version can be downloaded by replacing
 <code>tar.gz</code> in the snippet above with <code>zip</code>. A zip
 file can also be downloaded from the project <a href="https://github.com/Leeds-CDRC/nutrientprofiler" class="external-link">GitHub page</a> by
@@ -192,24 +188,21 @@ differs depending on the filetype.</p>
 </h4>
 <p>Using an appropriate relative path for the archive, you can install
 it from source:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># install the package directly from source</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"./nutrientprofiler-v1.0.0.tar.gz"</span>, repos <span class="op">=</span> <span class="cn">NULL</span>, type<span class="op">=</span><span class="st">"source"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co"># install the package directly from source</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"./nutrientprofiler-v1.0.0.tar.gz"</span>, repos <span class="op">=</span> <span class="cn">NULL</span>, type<span class="op">=</span><span class="st">"source"</span><span class="op">)</span></span></code></pre>
 <p>Change the suggested filename to suit your specific installation:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># install the package directly from source</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"./nutrientprofiler-VarEdits.tar.gz"</span>, repos <span class="op">=</span> <span class="cn">NULL</span>, type<span class="op">=</span><span class="st">"source"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co"># install the package directly from source</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"./nutrientprofiler-VarEdits.tar.gz"</span>, repos <span class="op">=</span> <span class="cn">NULL</span>, type<span class="op">=</span><span class="st">"source"</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="section level4">
 <h4 id="install--zip-archives">3.2 Install <code>.zip</code> archives<a class="anchor" aria-label="anchor" href="#install--zip-archives"></a>
 </h4>
 <p>In order to install the package from a <code>.zip</code> file, you
 need to use the <code>devtools</code> package:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># install and load devtools</span></span>
+<pre><code><span><span class="co"># install and load devtools</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_local</span><span class="op">(</span><span class="st">"./nutrientprofiler-v1.0.0.zip"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_local</span><span class="op">(</span><span class="st">"./nutrientprofiler-v1.0.0.zip"</span><span class="op">)</span></span></code></pre>
 <p>Again, change the suggested filename to suit your specific
 installation.</p>
 </div>
@@ -221,20 +214,13 @@ installation.</p>
 <p>Once <code>nutrientprofiler</code> has been installed on your system,
 it can be imported and used interactively or run within scripts on bulk
 data.</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>Ensure data is formatted to match the example csv files with same
-column names</p>
-</blockquote>
-</blockquote>
-</blockquote>
+<p><strong>Ensure data is formatted to match the example csv files with
+same column names.</strong></p>
 <p>Assuming the data that you want to analyse is stored in
 <code>"data/example_data.csv"</code> and you want to save the results
 to<code>"results/example_data_results.csv"</code> with all the original
 columns plus the results columns, you can use a script like this:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># load required libraries</span></span>
+<pre><code><span><span class="co"># load required libraries</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://leeds-cdrc.github.io/nutrientprofiler/">nutrientprofiler</a></span><span class="op">)</span></span>
@@ -255,11 +241,10 @@ columns plus the results columns, you can use a script like this:</p>
 <span>  <span class="va">protein_score</span>, <span class="va">satfat_score</span>, <span class="va">fibre_score</span>, <span class="va">NPM_score</span>, <span class="va">NPM_assessment</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Save results to a csv file</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv</a></span><span class="op">(</span><span class="va">npm_testcases_results</span>, <span class="st">"results/example_data_results.csv"</span>, row.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv</a></span><span class="op">(</span><span class="va">npm_testcases_results</span>, <span class="st">"results/example_data_results.csv"</span>, row.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre>
 <p>This only requires slight modification if the desired input file is
 instead in <code>"data/example_data.xlsx"</code>:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># load required libraries</span></span>
+<pre><code><span><span class="co"># load required libraries</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"readxl"</span><span class="op">)</span> <span class="co"># If this is not already installed in the workspace</span></span>
 <span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span>
@@ -270,7 +255,7 @@ instead in <code>"data/example_data.xlsx"</code>:</p>
 <span><span class="co"># read in the data on the first sheet of the spreadsheet (sheet = 1)</span></span>
 <span><span class="va">npm_testcases</span> <span class="op">=</span> <span class="fu">read_excel</span><span class="op">(</span><span class="st">"data/example_data.xlsx"</span>, sheet <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># The rest of the wokflow is the same...</span></span></code></pre></div>
+<span><span class="co"># The rest of the wokflow is the same...</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="troubleshooting">Troubleshooting<a class="anchor" aria-label="anchor" href="#troubleshooting"></a>
@@ -281,8 +266,7 @@ these columns.</p>
 <p>You can check the names of the columns using
 <code>names(npm_testcases)</code>.</p>
 <p>You can replace column names using a script like this:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># load required libraries</span></span>
+<pre><code><span><span class="co"># load required libraries</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://leeds-cdrc.github.io/nutrientprofiler/">nutrientprofiler</a></span><span class="op">)</span></span>
@@ -301,7 +285,7 @@ these columns.</p>
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="co"># Call the function on the example data</span></span>
-<span><span class="va">replaced_names</span> <span class="op">=</span> <span class="fu">replace_var_names</span><span class="op">(</span><span class="va">npm_testcases</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">replaced_names</span> <span class="op">=</span> <span class="fu">replace_var_names</span><span class="op">(</span><span class="va">npm_testcases</span><span class="op">)</span></span></code></pre>
 <p>The example shown above uses a function so that this can be reused
 with multiple data sets that have the same column naming issues.</p>
 </div>
