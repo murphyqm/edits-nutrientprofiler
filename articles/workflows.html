@@ -242,7 +242,7 @@ columns plus the results columns, you can use a script like this:</p>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://leeds-cdrc.github.io/nutrientprofiler/">nutrientprofiler</a></span><span class="op">)</span></span>
 <span><span class="co"># read in the data</span></span>
-<span><span class="va">npm_testcases</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span><span class="st">"data/example_data.csv"</span><span class="op">)</span></span>
+<span><span class="va">npm_testcases</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span><span class="st">"data/example_data.csv"</span><span class="op">)</span></span>
 <span><span class="co"># Analyse all entries, including specific gravity conversion, NPM scoring and assessment</span></span>
 <span><span class="va">npm_testcases_results</span> <span class="op">&lt;-</span> <span class="va">npm_testcases</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rowwise.html" class="external-link">rowwise</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
@@ -266,7 +266,7 @@ instead in <code>"data/example_data.xlsx"</code>:</p>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://readxl.tidyverse.org" class="external-link">readxl</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://leeds-cdrc.github.io/nutrientprofiler/">nutrientprofiler</a></span><span class="op">)</span></span>
 <span><span class="co"># read in the data on the first sheet of the spreadsheet (sheet = 1)</span></span>
-<span><span class="va">npm_testcases</span> <span class="op">=</span> <span class="fu">read_excel</span><span class="op">(</span><span class="st">"data/example_data.xlsx"</span>, sheet <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">npm_testcases</span> <span class="op">&lt;-</span> <span class="fu">read_excel</span><span class="op">(</span><span class="st">"data/example_data.xlsx"</span>, sheet <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="co"># The rest of the wokflow is the same...</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -284,7 +284,7 @@ these columns.</p>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://leeds-cdrc.github.io/nutrientprofiler/">nutrientprofiler</a></span><span class="op">)</span></span>
 <span><span class="co"># read in the data</span></span>
-<span><span class="va">npm_testcases</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span><span class="st">"data/example_data.csv"</span><span class="op">)</span></span>
+<span><span class="va">npm_testcases</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span><span class="st">"data/example_data.csv"</span><span class="op">)</span></span>
 <span><span class="co"># Function to rename variables</span></span>
 <span><span class="va">replace_var_names</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data_frame</span><span class="op">)</span><span class="op">{</span></span>
 <span>    <span class="kw">if</span> <span class="op">(</span><span class="st">"fat_measurement_g"</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">data_frame</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
@@ -295,7 +295,7 @@ these columns.</p>
 <span>    <span class="op">}</span></span>
 <span><span class="op">}</span></span>
 <span><span class="co"># Call the function on the example data</span></span>
-<span><span class="va">replaced_names</span> <span class="op">=</span> <span class="fu">replace_var_names</span><span class="op">(</span><span class="va">npm_testcases</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">replaced_names</span> <span class="op">&lt;-</span> <span class="fu">replace_var_names</span><span class="op">(</span><span class="va">npm_testcases</span><span class="op">)</span></span></code></pre></div>
 <p>The example shown above uses a function so that this can be reused
 with multiple data sets that have the same column naming issues.</p>
 </div>
