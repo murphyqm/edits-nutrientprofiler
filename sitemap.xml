@@ -73,6 +73,9 @@
     <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/energy_value_adjuster.html</loc>
   </url>
   <url>
+    <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/fillMissingParameters.html</loc>
+  </url>
+  <url>
     <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/fruit_veg_nut_scorer.html</loc>
   </url>
   <url>
@@ -86,6 +89,9 @@
   </url>
   <url>
     <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/inputDataCheck.html</loc>
+  </url>
+  <url>
+    <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/listMissingParameters.html</loc>
   </url>
   <url>
     <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/parameterRename.html</loc>

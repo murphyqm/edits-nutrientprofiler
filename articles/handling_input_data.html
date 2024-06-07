@@ -88,12 +88,16 @@
 column names for <code>nutrientprofiler</code>. This vignette provides
 some advice and guidelines on how to pre-process your data to allow
 analysis and assessment with <code>nutrientprofiler</code>.</p>
-<p>You can see what parameters are expected in more detail in the <a href="../reference/cdrcdrinks.html">Example dataset reference</a>.</p>
+<p>You can see what parameters are expected in more detail in the <a href="../reference/cdrcdrinks.html">Example dataset reference</a>. The
+order of parameters in the loaded data do not matter.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://leeds-cdrc.github.io/nutrientprofiler/">nutrientprofiler</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">irregular_data</span> <span class="op">&lt;-</span> <span class="va">cdrcdrinks</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">irregular_data</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">irregular_data</span><span class="op">)</span> <span class="op">==</span> <span class="st">"fvn_measurement_percent"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"fruit_nutrition_percent"</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">irregular_data</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">irregular_data</span><span class="op">)</span> <span class="op">==</span> <span class="st">"fvn_measurement_percent"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"fruit_nutrition_percent"</span></span>
+<span></span>
+<span><span class="va">missing_data</span> <span class="op">&lt;-</span> <span class="va">cdrcdrinks</span></span>
+<span><span class="va">missing_data</span> <span class="op">&lt;-</span> <span class="va">missing_data</span><span class="op">[</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="loading-an-example-template">Loading an example template<a class="anchor" aria-label="anchor" href="#loading-an-example-template"></a>
 </h2>
@@ -149,6 +153,118 @@ matches the listed <code>missing_column_name</code>:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/inputDataCheck.html">inputDataCheck</a></span><span class="op">(</span><span class="va">irregular_data</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "All required column names found. Proceed with analysis."</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="missing-data">Missing data<a class="anchor" aria-label="anchor" href="#missing-data"></a>
+</h2>
+<p>Some of the parameters are optional, but still need an allocated
+column in the input data table. This column can be simply filled with
+<code>NA</code> values. <code>nutrientprofiler</code> provides some
+simple functions to help achieve this quickly.</p>
+<p>You can see if we run the <code>inputDataCheck</code> there are no
+returns for “unmatched columns”, suggesting that the data is missing as
+opposed to unlabelled:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/inputDataCheck.html">inputDataCheck</a></span><span class="op">(</span><span class="va">missing_data</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "The provided dataframe is missing the following required column names:"</span></span>
+<span><span class="co">#&gt; [1] "brand"            "product_category"</span></span>
+<span><span class="co">#&gt; [1] "The provided dataframe contains these unmatched columns names:"</span></span>
+<span><span class="co">#&gt; character(0)</span></span>
+<span><span class="co">#&gt; [1] "missing_data &lt;- parameterRename(missing_column_name = 'brand', associated_data_column = '&lt;INSERT DATA COLUMN NAME HERE&gt;', data_frame = missing_data)"           </span></span>
+<span><span class="co">#&gt; [2] "missing_data &lt;- parameterRename(missing_column_name = 'product_category', associated_data_column = '&lt;INSERT DATA COLUMN NAME HERE&gt;', data_frame = missing_data)"</span></span></code></pre></div>
+<p>We can store the list of missing parameters by using the
+<code>listMissingParameters</code> function:</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">missing_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/listMissingParameters.html">listMissingParameters</a></span><span class="op">(</span><span class="va">missing_data</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">missing_params</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "brand"            "product_category"</span></span></code></pre></div>
+<p>If we are happy that these are optional parameters that can be filled
+with <code>NA</code> values, we can pass this list (or a subset of it)
+to the <code>fillMissingParameters</code> function:</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">filled_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fillMissingParameters.html">fillMissingParameters</a></span><span class="op">(</span><span class="va">missing_data</span>, <span class="va">missing_params</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">filled_data</span></span>
+<span><span class="co">#&gt;                  name product_type food_type drink_format</span></span>
+<span><span class="co">#&gt; 1              lembas         Food                       </span></span>
+<span><span class="co">#&gt; 2     zeno's icecream         Food Ice cream             </span></span>
+<span><span class="co">#&gt; 3         mystic rush        Drink                  Ready</span></span>
+<span><span class="co">#&gt; 4  delta ringer drink        Drink               Powdered</span></span>
+<span><span class="co">#&gt; 5        welter water        Drink                Cordial</span></span>
+<span><span class="co">#&gt; 6       janus's drink         Food                       </span></span>
+<span><span class="co">#&gt; 7   beta ringer drink        Drink               Powdered</span></span>
+<span><span class="co">#&gt; 8   zeta ringer drink        Drink               Powdered</span></span>
+<span><span class="co">#&gt; 9   heavyweight water        Drink                Cordial</span></span>
+<span><span class="co">#&gt; 10       bantam water        Drink                Cordial</span></span>
+<span><span class="co">#&gt;                drink_type                     nutrition_info</span></span>
+<span><span class="co">#&gt; 1                                                           </span></span>
+<span><span class="co">#&gt; 2                                                           </span></span>
+<span><span class="co">#&gt; 3  Carbonated/juice drink                                   </span></span>
+<span><span class="co">#&gt; 4                             Preparation instructions given</span></span>
+<span><span class="co">#&gt; 5                                                As consumed</span></span>
+<span><span class="co">#&gt; 6                                                           </span></span>
+<span><span class="co">#&gt; 7                                                As consumed</span></span>
+<span><span class="co">#&gt; 8                         Preparation instructions not given</span></span>
+<span><span class="co">#&gt; 9                             Preparation instructions given</span></span>
+<span><span class="co">#&gt; 10                        Preparation instructions not given</span></span>
+<span><span class="co">#&gt;    energy_measurement_kj energy_measurement_kcal sugar_measurement_g</span></span>
+<span><span class="co">#&gt; 1                    266                      NA                  50</span></span>
+<span><span class="co">#&gt; 2                     NA                      24                  21</span></span>
+<span><span class="co">#&gt; 3                     NA                     194                  11</span></span>
+<span><span class="co">#&gt; 4                    188                      NA                  15</span></span>
+<span><span class="co">#&gt; 5                     NA                     205                  19</span></span>
+<span><span class="co">#&gt; 6                     NA                      24                  21</span></span>
+<span><span class="co">#&gt; 7                    188                      NA                  15</span></span>
+<span><span class="co">#&gt; 8                    188                      NA                  15</span></span>
+<span><span class="co">#&gt; 9                     NA                     205                  19</span></span>
+<span><span class="co">#&gt; 10                    NA                     205                  19</span></span>
+<span><span class="co">#&gt;    satfat_measurement_g salt_measurement_g sodium_measurement_mg</span></span>
+<span><span class="co">#&gt; 1                     3                 NA                   0.6</span></span>
+<span><span class="co">#&gt; 2                    11               0.08                    NA</span></span>
+<span><span class="co">#&gt; 3                     0                 NA                 100.0</span></span>
+<span><span class="co">#&gt; 4                     0                 NA                 100.0</span></span>
+<span><span class="co">#&gt; 5                     0               0.10                    NA</span></span>
+<span><span class="co">#&gt; 6                    11               0.08                    NA</span></span>
+<span><span class="co">#&gt; 7                     0                 NA                 100.0</span></span>
+<span><span class="co">#&gt; 8                     0                 NA                 100.0</span></span>
+<span><span class="co">#&gt; 9                     0               0.10                    NA</span></span>
+<span><span class="co">#&gt; 10                    0               0.10                    NA</span></span>
+<span><span class="co">#&gt;    fibre_measurement_nsp fibre_measurement_aoac protein_measurement_g</span></span>
+<span><span class="co">#&gt; 1                      3                     NA                   7.0</span></span>
+<span><span class="co">#&gt; 2                     NA                    0.7                   3.5</span></span>
+<span><span class="co">#&gt; 3                     NA                    0.0                   0.0</span></span>
+<span><span class="co">#&gt; 4                     NA                    0.0                   0.5</span></span>
+<span><span class="co">#&gt; 5                     NA                    0.0                   0.1</span></span>
+<span><span class="co">#&gt; 6                     NA                    0.7                   3.5</span></span>
+<span><span class="co">#&gt; 7                     NA                    0.0                   0.5</span></span>
+<span><span class="co">#&gt; 8                     NA                    0.0                   0.5</span></span>
+<span><span class="co">#&gt; 9                     NA                    0.0                   0.1</span></span>
+<span><span class="co">#&gt; 10                    NA                    0.0                   0.1</span></span>
+<span><span class="co">#&gt;    fvn_measurement_percent weight_g volume_ml volume_water_ml brand</span></span>
+<span><span class="co">#&gt; 1                        0      100        NA              NA    NA</span></span>
+<span><span class="co">#&gt; 2                        0       NA       100              NA    NA</span></span>
+<span><span class="co">#&gt; 3                        0       NA       100              NA    NA</span></span>
+<span><span class="co">#&gt; 4                        3       25        NA             100    NA</span></span>
+<span><span class="co">#&gt; 5                        6       NA       100              NA    NA</span></span>
+<span><span class="co">#&gt; 6                        0       NA       100              NA    NA</span></span>
+<span><span class="co">#&gt; 7                        3       NA        50              NA    NA</span></span>
+<span><span class="co">#&gt; 8                        3       25        NA              NA    NA</span></span>
+<span><span class="co">#&gt; 9                        6       NA        20             100    NA</span></span>
+<span><span class="co">#&gt; 10                       6       NA       100              NA    NA</span></span>
+<span><span class="co">#&gt;    product_category</span></span>
+<span><span class="co">#&gt; 1                NA</span></span>
+<span><span class="co">#&gt; 2                NA</span></span>
+<span><span class="co">#&gt; 3                NA</span></span>
+<span><span class="co">#&gt; 4                NA</span></span>
+<span><span class="co">#&gt; 5                NA</span></span>
+<span><span class="co">#&gt; 6                NA</span></span>
+<span><span class="co">#&gt; 7                NA</span></span>
+<span><span class="co">#&gt; 8                NA</span></span>
+<span><span class="co">#&gt; 9                NA</span></span>
+<span><span class="co">#&gt; 10               NA</span></span></code></pre></div>
+<p>This then allows the data to be processed in bulk without triggerring
+errors related to missing data.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
