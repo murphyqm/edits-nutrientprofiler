@@ -90,14 +90,6 @@ some advice and guidelines on how to pre-process your data to allow
 analysis and assessment with <code>nutrientprofiler</code>.</p>
 <p>You can see what parameters are expected in more detail in the <a href="../reference/cdrcdrinks.html">Example dataset reference</a>. The
 order of parameters in the loaded data do not matter.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://leeds-cdrc.github.io/nutrientprofiler/">nutrientprofiler</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">irregular_data</span> <span class="op">&lt;-</span> <span class="va">cdrcdrinks</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">irregular_data</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">irregular_data</span><span class="op">)</span> <span class="op">==</span> <span class="st">"fvn_measurement_percent"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"fruit_nutrition_percent"</span></span>
-<span></span>
-<span><span class="va">missing_data</span> <span class="op">&lt;-</span> <span class="va">cdrcdrinks</span></span>
-<span><span class="va">missing_data</span> <span class="op">&lt;-</span> <span class="va">missing_data</span><span class="op">[</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="loading-an-example-template">Loading an example template<a class="anchor" aria-label="anchor" href="#loading-an-example-template"></a>
 </h2>
@@ -107,12 +99,12 @@ using a template.</p>
 <p>The <code>nutrientprofiler</code> package offers an example dataset,
 <code>cdrcdrinks</code>. This can be saved out as an example csv file
 and then edited and loaded with real data:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Save an example csv file to your current working directory</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv</a></span><span class="op">(</span><span class="va">cdrcdrinks</span>, <span class="st">"template_full.csv"</span>, row.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p>Alternatively, just the headers can be saved, providing a blank csv
 file which can be opened in Excel or your editor of choice:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Save an example csv file to your current working directory</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">cdrcdrinks</span><span class="op">)</span><span class="op">)</span>, <span class="st">"template_headings.csv"</span>, row.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -123,7 +115,7 @@ file which can be opened in Excel or your editor of choice:</p>
 required, a reproducible workflow can be set up to rename these
 parameters as required.</p>
 <p>The first step is to check the existing column names:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/inputDataCheck.html">inputDataCheck</a></span><span class="op">(</span><span class="va">cdrcdrinks</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "All required column names found. Proceed with analysis."</span></span></code></pre></div>
 <p>If the dataframe contains names as expected, you’ll get a message
@@ -132,7 +124,7 @@ above.</p>
 <p>However, lets say we have loaded in a dataset from csv
 <code>irregular_data</code> that does not contain the exact columns
 required:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/inputDataCheck.html">inputDataCheck</a></span><span class="op">(</span><span class="va">irregular_data</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "The provided dataframe is missing the following required column names:"</span></span>
 <span><span class="co">#&gt; [1] "fvn_measurement_percent"</span></span>
@@ -146,11 +138,11 @@ example), and provides you with a prompt to use the
 <p>You can copy this hint and replace
 <code>&lt;INSERT DATA COLUMN NAME HERE&gt;</code> with the data that
 matches the listed <code>missing_column_name</code>:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">irregular_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/parameterRename.html">parameterRename</a></span><span class="op">(</span>missing_column_name <span class="op">=</span> <span class="st">'fvn_measurement_percent'</span>, associated_data_column <span class="op">=</span> <span class="st">'fruit_nutrition_percent'</span>, data_frame <span class="op">=</span> <span class="va">irregular_data</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "Replacing fruit_nutrition_percent with fvn_measurement_percent"</span></span></code></pre></div>
 <p>You can now check again if the required parameters are available.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/inputDataCheck.html">inputDataCheck</a></span><span class="op">(</span><span class="va">irregular_data</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "All required column names found. Proceed with analysis."</span></span></code></pre></div>
 </div>
@@ -164,7 +156,7 @@ simple functions to help achieve this quickly.</p>
 <p>You can see if we run the <code>inputDataCheck</code> there are no
 returns for “unmatched columns”, suggesting that the data is missing as
 opposed to unlabelled:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/inputDataCheck.html">inputDataCheck</a></span><span class="op">(</span><span class="va">missing_data</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "The provided dataframe is missing the following required column names:"</span></span>
 <span><span class="co">#&gt; [1] "brand"            "product_category"</span></span>
@@ -174,7 +166,7 @@ opposed to unlabelled:</p>
 <span><span class="co">#&gt; [2] "missing_data &lt;- parameterRename(missing_column_name = 'product_category', associated_data_column = '&lt;INSERT DATA COLUMN NAME HERE&gt;', data_frame = missing_data)"</span></span></code></pre></div>
 <p>We can store the list of missing parameters by using the
 <code>listMissingParameters</code> function:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">missing_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/listMissingParameters.html">listMissingParameters</a></span><span class="op">(</span><span class="va">missing_data</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">missing_params</span><span class="op">)</span></span>
@@ -182,7 +174,7 @@ opposed to unlabelled:</p>
 <p>If we are happy that these are optional parameters that can be filled
 with <code>NA</code> values, we can pass this list (or a subset of it)
 to the <code>fillMissingParameters</code> function:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">filled_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fillMissingParameters.html">fillMissingParameters</a></span><span class="op">(</span><span class="va">missing_data</span>, <span class="va">missing_params</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">filled_data</span></span>
