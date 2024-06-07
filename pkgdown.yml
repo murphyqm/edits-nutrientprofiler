@@ -2,12 +2,13 @@ pandoc: 3.1.11
 pkgdown: 2.0.9
 pkgdown_sha: ~
 articles:
+  handling_input_data: handling_input_data.html
   nutrientprofile_assessment: nutrientprofile_assessment.html
   nutrientprofile_scoring: nutrientprofile_scoring.html
   nutrientprofiler: nutrientprofiler.html
   specific_gravity: specific_gravity.html
   workflows: workflows.html
-last_built: 2024-06-07T11:40Z
+last_built: 2024-06-07T14:23Z
 urls:
   reference: https://leeds-cdrc.github.io/nutrientprofiler/reference
   article: https://leeds-cdrc.github.io/nutrientprofiler/articles
