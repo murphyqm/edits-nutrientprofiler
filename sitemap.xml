@@ -43,7 +43,16 @@
     <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/A_scorer.html</loc>
   </url>
   <url>
+    <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/AutoDefaultParamCheck.html</loc>
+  </url>
+  <url>
+    <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/AutoDefaultParamNote.html</loc>
+  </url>
+  <url>
     <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/C_scorer.html</loc>
+  </url>
+  <url>
+    <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/ManualParamUpdate.html</loc>
   </url>
   <url>
     <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/NPMAssess.html</loc>
@@ -61,10 +70,16 @@
     <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/NPM_total.html</loc>
   </url>
   <url>
+    <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/ReqParamCheck.html</loc>
+  </url>
+  <url>
     <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/SGConverter.html</loc>
   </url>
   <url>
     <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/SGtab.html</loc>
+  </url>
+  <url>
+    <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/SaveReport.html</loc>
   </url>
   <url>
     <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/cdrcdrinks.html</loc>
