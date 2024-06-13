@@ -6,9 +6,10 @@ articles:
   nutrientprofile_assessment: nutrientprofile_assessment.html
   nutrientprofile_scoring: nutrientprofile_scoring.html
   nutrientprofiler: nutrientprofiler.html
+  parameter_guide: parameter_guide.html
   specific_gravity: specific_gravity.html
   workflows: workflows.html
-last_built: 2024-06-13T18:02Z
+last_built: 2024-06-13T18:22Z
 urls:
   reference: https://leeds-cdrc.github.io/nutrientprofiler/reference
   article: https://leeds-cdrc.github.io/nutrientprofiler/articles
