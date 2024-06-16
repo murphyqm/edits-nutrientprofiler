@@ -105,6 +105,8 @@ library to analyse it.</p>
 <p>While there are an array of functions to check parameter names and
 missing parameters, it is useful to be able to manually check your input
 data with base R or a library like tidyr or dplyr additionally.</p>
+<p>You can check what column names are in your loaded dataframe using
+base R:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Print out your data column names</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">example_data</span><span class="op">)</span></span>
@@ -119,6 +121,208 @@ data with base R or a library like tidyr or dplyr additionally.</p>
 <span><span class="co">#&gt; [17] "protein_measurement_g"   "fvn_measurement_percent"</span></span>
 <span><span class="co">#&gt; [19] "weight_g"                "volume_ml"              </span></span>
 <span><span class="co">#&gt; [21] "volume_water_ml"</span></span></code></pre></div>
+<p>You can compare these parameter names to the expected parameters that
+<code>nutrientprofiler</code> uses for analysis using the
+<code><a href="../reference/inputDataCheck.html">inputDataCheck()</a></code> function:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/inputDataCheck.html">inputDataCheck</a></span><span class="op">(</span><span class="va">example_data</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "All required column names found. Proceed with analysis."</span></span></code></pre></div>
+<p>If required, parameter names can be fixed at this point using the
+<code><a href="../reference/parameterRename.html">parameterRename()</a></code> and <code><a href="../reference/fillMissingParameters.html">fillMissingParameters()</a></code>
+functions.</p>
+<p>Next, you can use the <code><a href="../reference/CheckValues.html">CheckValues()</a></code> function to produce
+an overview of the values stored in your dataframe:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">overview_of_values</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/CheckValues.html">CheckValues</a></span><span class="op">(</span><span class="va">example_data</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">overview_of_values</span><span class="op">)</span></span>
+<span><span class="co">#&gt;             Parameter_name Count_unique_values</span></span>
+<span><span class="co">#&gt; 1                     name                  10</span></span>
+<span><span class="co">#&gt; 2                    brand                   1</span></span>
+<span><span class="co">#&gt; 3         product_category                   1</span></span>
+<span><span class="co">#&gt; 4             product_type                   2</span></span>
+<span><span class="co">#&gt; 5                food_type                   2</span></span>
+<span><span class="co">#&gt; 6             drink_format                   5</span></span>
+<span><span class="co">#&gt; 7               drink_type                   2</span></span>
+<span><span class="co">#&gt; 8           nutrition_info                   5</span></span>
+<span><span class="co">#&gt; 9    energy_measurement_kj                   3</span></span>
+<span><span class="co">#&gt; 10 energy_measurement_kcal                   4</span></span>
+<span><span class="co">#&gt; 11     sugar_measurement_g                   5</span></span>
+<span><span class="co">#&gt; 12    satfat_measurement_g                   3</span></span>
+<span><span class="co">#&gt; 13      salt_measurement_g                   3</span></span>
+<span><span class="co">#&gt; 14   sodium_measurement_mg                   3</span></span>
+<span><span class="co">#&gt; 15   fibre_measurement_nsp                   2</span></span>
+<span><span class="co">#&gt; 16  fibre_measurement_aoac                   3</span></span>
+<span><span class="co">#&gt; 17   protein_measurement_g                   5</span></span>
+<span><span class="co">#&gt; 18 fvn_measurement_percent                   3</span></span>
+<span><span class="co">#&gt; 19                weight_g                   3</span></span>
+<span><span class="co">#&gt; 20               volume_ml                   4</span></span>
+<span><span class="co">#&gt; 21         volume_water_ml                   2</span></span>
+<span><span class="co">#&gt;                                                                                                                                                   Unique_values</span></span>
+<span><span class="co">#&gt; 1  lembas, zeno's icecream, mystic rush, delta ringer drink, welter water, janus's drink, beta ringer drink, zeta ringer drink, heavyweight water, bantam water</span></span>
+<span><span class="co">#&gt; 2                                                                                                                                                            NA</span></span>
+<span><span class="co">#&gt; 3                                                                                                                                                            NA</span></span>
+<span><span class="co">#&gt; 4                                                                                                                                                   Food, Drink</span></span>
+<span><span class="co">#&gt; 5                                                                                                                                                   , Ice cream</span></span>
+<span><span class="co">#&gt; 6                                                                                                                            , Ready, Powdered, Cordial, Powder</span></span>
+<span><span class="co">#&gt; 7                                                                                                                                         , Carbted/juice drink</span></span>
+<span><span class="co">#&gt; 8                                               , Preparation instructions given, As consumed, Prep. instructions not given, Preparation instructions not given</span></span>
+<span><span class="co">#&gt; 9                                                                                                                                                  266, NA, 188</span></span>
+<span><span class="co">#&gt; 10                                                                                                                                             NA, 24, 194, 205</span></span>
+<span><span class="co">#&gt; 11                                                                                                                                           50, 21, 11, 15, 19</span></span>
+<span><span class="co">#&gt; 12                                                                                                                                                     3, 11, 0</span></span>
+<span><span class="co">#&gt; 13                                                                                                                                                NA, 0.08, 0.1</span></span>
+<span><span class="co">#&gt; 14                                                                                                                                                 0.6, NA, 100</span></span>
+<span><span class="co">#&gt; 15                                                                                                                                                        3, NA</span></span>
+<span><span class="co">#&gt; 16                                                                                                                                                   NA, 0.7, 0</span></span>
+<span><span class="co">#&gt; 17                                                                                                                                          7, 3.5, 0, 0.5, 0.1</span></span>
+<span><span class="co">#&gt; 18                                                                                                                                                      0, 3, 6</span></span>
+<span><span class="co">#&gt; 19                                                                                                                                                  100, NA, 25</span></span>
+<span><span class="co">#&gt; 20                                                                                                                                              NA, 100, 50, 20</span></span>
+<span><span class="co">#&gt; 21                                                                                                                                                      NA, 100</span></span></code></pre></div>
+<p>You can read these and compare them to the parameter table provided
+in the documentation, and can save the output to a csv file for future
+reference:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv</a></span><span class="op">(</span><span class="va">overview_of_values</span>, <span class="st">"path/to/output/file.csv"</span>, row.names<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<p>In this example, we have a few values with typos that will cause
+issues:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">overview_of_values</span><span class="op">[</span><span class="fl">6</span>,<span class="op">]</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   Parameter_name Count_unique_values                      Unique_values</span></span>
+<span><span class="co">#&gt; 6   drink_format                   5 , Ready, Powdered, Cordial, Powder</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">overview_of_values</span><span class="op">[</span><span class="fl">7</span>,<span class="op">]</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   Parameter_name Count_unique_values         Unique_values</span></span>
+<span><span class="co">#&gt; 7     drink_type                   2 , Carbted/juice drink</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">overview_of_values</span><span class="op">[</span><span class="fl">8</span>,<span class="op">]</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   Parameter_name Count_unique_values</span></span>
+<span><span class="co">#&gt; 8 nutrition_info                   5</span></span>
+<span><span class="co">#&gt;                                                                                                     Unique_values</span></span>
+<span><span class="co">#&gt; 8 , Preparation instructions given, As consumed, Prep. instructions not given, Preparation instructions not given</span></span></code></pre></div>
+<p>We have <code>Powder</code> instead of <code>Powdered</code>;
+<code>Carbted/juice drink</code> instead of
+<code>Carbonated/juice drink</code>; and
+<code>Prep. instructions not given</code> instead of
+<code>Preparation instructions not given</code>. For clear cases of
+typos like this, we can easily replace all incorrect values:</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">example_data</span><span class="op">$</span><span class="va">drink_format</span><span class="op">[</span><span class="va">example_data</span><span class="op">$</span><span class="va">drink_format</span><span class="op">==</span><span class="st">"Powder"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"Powdered"</span></span>
+<span><span class="va">example_data</span><span class="op">$</span><span class="va">drink_type</span><span class="op">[</span><span class="va">example_data</span><span class="op">$</span><span class="va">drink_type</span><span class="op">==</span><span class="st">"Carbted/juice drink"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"Carbonated/juice drink"</span></span>
+<span><span class="va">example_data</span><span class="op">$</span><span class="va">nutrition_info</span><span class="op">[</span><span class="va">example_data</span><span class="op">$</span><span class="va">nutrition_info</span><span class="op">==</span><span class="st">"Prep. instructions not given"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"Preparation instructions not given"</span></span></code></pre></div>
+<p>After updating these in place, you can check again if you have
+captured all the incorrect values:</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/CheckValues.html">CheckValues</a></span><span class="op">(</span><span class="va">example_data</span><span class="op">)</span></span>
+<span><span class="co">#&gt;             Parameter_name Count_unique_values</span></span>
+<span><span class="co">#&gt; 1                     name                  10</span></span>
+<span><span class="co">#&gt; 2                    brand                   1</span></span>
+<span><span class="co">#&gt; 3         product_category                   1</span></span>
+<span><span class="co">#&gt; 4             product_type                   2</span></span>
+<span><span class="co">#&gt; 5                food_type                   2</span></span>
+<span><span class="co">#&gt; 6             drink_format                   4</span></span>
+<span><span class="co">#&gt; 7               drink_type                   2</span></span>
+<span><span class="co">#&gt; 8           nutrition_info                   4</span></span>
+<span><span class="co">#&gt; 9    energy_measurement_kj                   3</span></span>
+<span><span class="co">#&gt; 10 energy_measurement_kcal                   4</span></span>
+<span><span class="co">#&gt; 11     sugar_measurement_g                   5</span></span>
+<span><span class="co">#&gt; 12    satfat_measurement_g                   3</span></span>
+<span><span class="co">#&gt; 13      salt_measurement_g                   3</span></span>
+<span><span class="co">#&gt; 14   sodium_measurement_mg                   3</span></span>
+<span><span class="co">#&gt; 15   fibre_measurement_nsp                   2</span></span>
+<span><span class="co">#&gt; 16  fibre_measurement_aoac                   3</span></span>
+<span><span class="co">#&gt; 17   protein_measurement_g                   5</span></span>
+<span><span class="co">#&gt; 18 fvn_measurement_percent                   3</span></span>
+<span><span class="co">#&gt; 19                weight_g                   3</span></span>
+<span><span class="co">#&gt; 20               volume_ml                   4</span></span>
+<span><span class="co">#&gt; 21         volume_water_ml                   2</span></span>
+<span><span class="co">#&gt;                                                                                                                                                   Unique_values</span></span>
+<span><span class="co">#&gt; 1  lembas, zeno's icecream, mystic rush, delta ringer drink, welter water, janus's drink, beta ringer drink, zeta ringer drink, heavyweight water, bantam water</span></span>
+<span><span class="co">#&gt; 2                                                                                                                                                            NA</span></span>
+<span><span class="co">#&gt; 3                                                                                                                                                            NA</span></span>
+<span><span class="co">#&gt; 4                                                                                                                                                   Food, Drink</span></span>
+<span><span class="co">#&gt; 5                                                                                                                                                   , Ice cream</span></span>
+<span><span class="co">#&gt; 6                                                                                                                                    , Ready, Powdered, Cordial</span></span>
+<span><span class="co">#&gt; 7                                                                                                                                      , Carbonated/juice drink</span></span>
+<span><span class="co">#&gt; 8                                                                             , Preparation instructions given, As consumed, Preparation instructions not given</span></span>
+<span><span class="co">#&gt; 9                                                                                                                                                  266, NA, 188</span></span>
+<span><span class="co">#&gt; 10                                                                                                                                             NA, 24, 194, 205</span></span>
+<span><span class="co">#&gt; 11                                                                                                                                           50, 21, 11, 15, 19</span></span>
+<span><span class="co">#&gt; 12                                                                                                                                                     3, 11, 0</span></span>
+<span><span class="co">#&gt; 13                                                                                                                                                NA, 0.08, 0.1</span></span>
+<span><span class="co">#&gt; 14                                                                                                                                                 0.6, NA, 100</span></span>
+<span><span class="co">#&gt; 15                                                                                                                                                        3, NA</span></span>
+<span><span class="co">#&gt; 16                                                                                                                                                   NA, 0.7, 0</span></span>
+<span><span class="co">#&gt; 17                                                                                                                                          7, 3.5, 0, 0.5, 0.1</span></span>
+<span><span class="co">#&gt; 18                                                                                                                                                      0, 3, 6</span></span>
+<span><span class="co">#&gt; 19                                                                                                                                                  100, NA, 25</span></span>
+<span><span class="co">#&gt; 20                                                                                                                                              NA, 100, 50, 20</span></span>
+<span><span class="co">#&gt; 21                                                                                                                                                      NA, 100</span></span></code></pre></div>
+<p><strong>Note that for a large dataset with thousands of values, the
+number of unique values for numerical parameters such as
+<code>weight_g</code> will be very high. Instead of printing the full
+table, you should instead use subsets for your initial
+overview:</strong></p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">overview_of_values</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Parameter_name"</span>, <span class="st">"Count_unique_values"</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="co">#&gt;             Parameter_name Count_unique_values</span></span>
+<span><span class="co">#&gt; 1                     name                  10</span></span>
+<span><span class="co">#&gt; 2                    brand                   1</span></span>
+<span><span class="co">#&gt; 3         product_category                   1</span></span>
+<span><span class="co">#&gt; 4             product_type                   2</span></span>
+<span><span class="co">#&gt; 5                food_type                   2</span></span>
+<span><span class="co">#&gt; 6             drink_format                   5</span></span>
+<span><span class="co">#&gt; 7               drink_type                   2</span></span>
+<span><span class="co">#&gt; 8           nutrition_info                   5</span></span>
+<span><span class="co">#&gt; 9    energy_measurement_kj                   3</span></span>
+<span><span class="co">#&gt; 10 energy_measurement_kcal                   4</span></span>
+<span><span class="co">#&gt; 11     sugar_measurement_g                   5</span></span>
+<span><span class="co">#&gt; 12    satfat_measurement_g                   3</span></span>
+<span><span class="co">#&gt; 13      salt_measurement_g                   3</span></span>
+<span><span class="co">#&gt; 14   sodium_measurement_mg                   3</span></span>
+<span><span class="co">#&gt; 15   fibre_measurement_nsp                   2</span></span>
+<span><span class="co">#&gt; 16  fibre_measurement_aoac                   3</span></span>
+<span><span class="co">#&gt; 17   protein_measurement_g                   5</span></span>
+<span><span class="co">#&gt; 18 fvn_measurement_percent                   3</span></span>
+<span><span class="co">#&gt; 19                weight_g                   3</span></span>
+<span><span class="co">#&gt; 20               volume_ml                   4</span></span>
+<span><span class="co">#&gt; 21         volume_water_ml                   2</span></span></code></pre></div>
+<p>This allows you to identify the categorical parameters and to print
+these rows indicidually:</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Printing using the row index</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">overview_of_values</span><span class="op">[</span><span class="fl">6</span>,<span class="op">]</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   Parameter_name Count_unique_values                      Unique_values</span></span>
+<span><span class="co">#&gt; 6   drink_format                   5 , Ready, Powdered, Cordial, Powder</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="co"># Printing using the parameter name</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">overview_of_values</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">overview_of_values</span><span class="op">$</span><span class="va">Parameter_name</span> <span class="op">==</span> <span class="st">"drink_format"</span><span class="op">)</span>,<span class="op">]</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   Parameter_name Count_unique_values                      Unique_values</span></span>
+<span><span class="co">#&gt; 6   drink_format                   5 , Ready, Powdered, Cordial, Powder</span></span></code></pre></div>
+<p>In order to check numeric values, you can use max and minimum values
+(and measures of average if desired) to check that the values are within
+the expected bounds by using basic mathematical functions on the column
+of interest in the original product data dataframe:</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="st">"protein_measurement_g values"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "protein_measurement_g values"</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Max:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">example_data</span><span class="op">$</span><span class="va">protein_measurement_g</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "Max: 7"</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Min.:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="va">example_data</span><span class="op">$</span><span class="va">protein_measurement_g</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "Min.: 0"</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Mean:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">example_data</span><span class="op">$</span><span class="va">protein_measurement_g</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "Mean: 1.58"</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Median:"</span>, <span class="fu"><a href="https://rdrr.io/r/stats/median.html" class="external-link">median</a></span><span class="op">(</span><span class="va">example_data</span><span class="op">$</span><span class="va">protein_measurement_g</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "Median: 0.5"</span></span></code></pre></div>
+<p>Individual values can be interrogated, plotted against other
+parameters using a graphics library like <code>ggplot</code>, and
+replaced in a similar way to described above for the character-type
+entries.</p>
 </div>
   </main>
 </div>
