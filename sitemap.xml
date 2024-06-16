@@ -13,6 +13,9 @@
     <loc>https://leeds-cdrc.github.io/nutrientprofiler/LICENSE.html</loc>
   </url>
   <url>
+    <loc>https://leeds-cdrc.github.io/nutrientprofiler/articles/general-guidance.html</loc>
+  </url>
+  <url>
     <loc>https://leeds-cdrc.github.io/nutrientprofiler/articles/handling_input_data.html</loc>
   </url>
   <url>
@@ -53,6 +56,9 @@
   </url>
   <url>
     <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/C_scorer.html</loc>
+  </url>
+  <url>
+    <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/CheckValues.html</loc>
   </url>
   <url>
     <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/ManualParamUpdate.html</loc>
