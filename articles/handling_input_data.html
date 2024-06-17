@@ -44,6 +44,7 @@
 <li class="active nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/custom_specific_gravity.html">Custom specific gravity</a>
     <a class="dropdown-item" href="../articles/handling_input_data.html">Handling input data</a>
     <a class="dropdown-item" href="../articles/nutrientprofile_assessment.html">Nutrient Profile Model Assessment</a>
     <a class="dropdown-item" href="../articles/nutrientprofile_scoring.html">Nutrient Profile Model Scoring</a>
@@ -90,8 +91,10 @@
 column names for <code>nutrientprofiler</code>. This vignette provides
 some advice and guidelines on how to pre-process your data to allow
 analysis and assessment with <code>nutrientprofiler</code>.</p>
-<p>You can see what parameters are expected in more detail in the <a href="../reference/cdrcdrinks.html">Example dataset reference</a>. The
-order of parameters in the loaded data do not matter.</p>
+<p>You can see what parameters are expected in more detail in the <a href="../articles/parameter_guide.html">Parameter guide
+documentation</a> or the <a href="../reference/cdrcdrinks.html">Example
+dataset reference</a>. The order of parameters/columns in the loaded
+data do not matter.</p>
 <div class="section level2">
 <h2 id="loading-an-example-template">Loading an example template<a class="anchor" aria-label="anchor" href="#loading-an-example-template"></a>
 </h2>
@@ -259,6 +262,13 @@ to the <code>fillMissingParameters</code> function:</p>
 <span><span class="co">#&gt; 10               NA</span></span></code></pre></div>
 <p>This then allows the data to be processed in bulk without triggerring
 errors related to missing data.</p>
+</div>
+<div class="section level2">
+<h2 id="data-validity">Data validity<a class="anchor" aria-label="anchor" href="#data-validity"></a>
+</h2>
+<p>Please see the article on <a href="../articles/preprocessing.html">Preprocessing input data</a> to
+see advice on how to check whether parameters are valid and within the
+range expected, and to fix any typos in the dataset.</p>
 </div>
 <div class="section level2">
 <h2 id="missing-data">Missing data<a class="anchor" aria-label="anchor" href="#missing-data"></a>
