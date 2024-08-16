@@ -20,6 +20,7 @@
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="articles/custom_specific_gravity.html">Custom specific gravity</a></li>
+    <li><a class="dropdown-item" href="articles/example_workflow.html">Example HPC workflow and troubleshooting</a></li>
     <li><a class="dropdown-item" href="articles/handling_input_data.html">Handling input data</a></li>
     <li><a class="dropdown-item" href="articles/nutrientprofile_assessment.html">Nutrient Profile Model Assessment</a></li>
     <li><a class="dropdown-item" href="articles/nutrientprofile_scoring.html">Nutrient Profile Model Scoring</a></li>
@@ -49,11 +50,20 @@
 <div class="section level2">
 <h2 id="local-setup">Local setup<a class="anchor" aria-label="anchor" href="#local-setup"></a></h2>
 <p>To work with this project locally you will need <a href="https://git-scm.com/" class="external-link">Git</a> and <a href="https://www.r-project.org/about.html" class="external-link">R</a> installed locally. It is also recommended that you install <a href="https://www.docker.com/" class="external-link">Docker</a> and <a href="https://code.visualstudio.com/" class="external-link">VSCode</a> to enable you to utilise the <a href="https://code.visualstudio.com/docs/devcontainers/containers" class="external-link">devcontainer</a> setup or edit the code directly via GitHub Codespaces.</p>
+<p>Alternatively, you can use conda to manage your R packages; see instructions below.</p>
 <p>If you’re unfamiliar with using <code>git</code> why not check out the fantastic <a href="https://swcarpentry.github.io/git-novice/" class="external-link">Carpentries introductory course</a>.</p>
 <p>To get working on this project you will need the <a href="https://devtools.r-lib.org/" class="external-link"><code>devtools</code></a> package which you can install with the following R command:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Install devtools from CRAN</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span></span></code></pre></div>
+<div class="section level4">
+<h4 id="using-conda">Using conda<a class="anchor" aria-label="anchor" href="#using-conda"></a></h4>
+<p>You can install R and manage your packages and dependencies using conda (see the open source Miniforge installer <a href="https://github.com/conda-forge/miniforge" class="external-link">here</a>). The file <code>conda-dev-env.yml</code> contains a minimal list of packages (including <code>devtools</code>), allowing you to create an environment with conda:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="ex">conda</span> env create <span class="at">-f</span> conda-dev-env.yml</span></code></pre></div>
+<p>Once you’ve agreed to the installation, you can activate your environment called <code>np-r-env</code>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="ex">conda</span> activate np-r-env</span></code></pre></div>
+<p>You will now be able to launch an interactive R session from the terminal, or run <code>.R</code> files with the <code>Rscript</code> command.</p>
+</div>
 <div class="section level3">
 <h3 id="development-workflow">Development workflow<a class="anchor" aria-label="anchor" href="#development-workflow"></a></h3>
 <p>When working locally you should use the following workflow to help develop the code:</p>
