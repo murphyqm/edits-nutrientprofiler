@@ -74,8 +74,13 @@
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"Leeds-CDRC/nutrientprofiler"</span><span class="op">)</span></span></code></pre></div>
-<p>You can also download the package as an archive from GitHub and install them from source using the following steps. The steps below show how to do this directly within R but you can also download an archive of the respository directly from the <a href="https://github.com/Leeds-CDRC/nutrientprofiler/releases" class="external-link">GitHub releases</a> page.</p>
+<p>You can also specify a version of the nutrientprofiler package:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"leeds-cdrc/nutrientprofiler@v1.0.0"</span><span class="op">)</span></span></code></pre></div>
+<p>You can also download the package as an archive from GitHub and install from source using the following steps. The steps below show how to do this directly within R but you can also download an archive of the respository directly from the <a href="https://github.com/Leeds-CDRC/nutrientprofiler/releases" class="external-link">GitHub releases</a> page.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># download the repository as a .tar.gz archive</span></span>
 <span><span class="co"># to your current directory</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html" class="external-link">download.file</a></span><span class="op">(</span><span class="st">"https://github.com/Leeds-CDRC/nutrientprofiler/archive/refs/tags/v0.2.2.tar.gz"</span>,</span>
@@ -102,7 +107,7 @@
 <p>To work with this project locally you will need <a href="https://git-scm.com/" class="external-link">Git</a> and <a href="https://www.r-project.org/about.html" class="external-link">R</a> installed locally. It is also recommended that you install <a href="https://www.docker.com/" class="external-link">Docker</a> and <a href="https://code.visualstudio.com/" class="external-link">VSCode</a> to enable you to utilise the <a href="https://code.visualstudio.com/docs/devcontainers/containers" class="external-link">devcontainer</a> setup or edit the code directly via GitHub Codespaces.</p>
 <p>If you’re unfamiliar with using <code>git</code> why not check out the fantastic <a href="https://swcarpentry.github.io/git-novice/" class="external-link">Carpentries introductory course</a>.</p>
 <p>To get working on this project you will need the <a href="https://devtools.r-lib.org/" class="external-link"><code>devtools</code></a> package which you can install with the following R command:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Install devtools from CRAN</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span></span></code></pre></div>
 <div class="section level3">
