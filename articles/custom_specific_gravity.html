@@ -72,14 +72,6 @@
 
     
     
-<pre><code><span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Attaching package: 'dplyr'</span></span>
-<span><span class="co">#&gt; The following objects are masked from 'package:stats':</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     filter, lag</span></span>
-<span><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span></code></pre>
 <p>This article walks through how you can apply custom specific gravity
 conversion factors or adjusted volumes to your input data. Please ensure
 you have read and understood the <a href="../articles/specific_gravity.html">Specific gravity</a> article
@@ -103,7 +95,7 @@ specific gravity values between these two steps.</p>
 </h2>
 <p>As always, we need to load in the data set and the required
 libraries:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># load required libraries</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
@@ -114,7 +106,7 @@ libraries:</p>
 <p>This dataset has a column called <code>custom_sg_adjusted</code> that
 is empty except for products where a final adjusted volume based on
 specific gravity has been provided.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">example_data</span></span>
 <span><span class="co">#&gt;                  name brand product_category product_type food_type</span></span>
 <span><span class="co">#&gt; 1              lembas    NA               NA         Food          </span></span>
@@ -196,7 +188,7 @@ specific gravity has been provided.</p>
 <p>Now, we calculate specific gravities as usual, initially ignoring the
 custom values, before then modifying the output to include our custom
 values:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">example_data_sg_calc</span> <span class="op">&lt;-</span> <span class="va">example_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rowwise.html" class="external-link">rowwise</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span> sg <span class="op">=</span> <span class="fu"><a href="../reference/SGConverter.html">SGConverter</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/pick.html" class="external-link">pick</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
@@ -215,7 +207,7 @@ values:</p>
 <span><span class="co">#&gt;  [1] 100.00 130.00 104.00 128.75 103.00 100.00  51.50  25.00 125.00 109.00</span></span></code></pre></div>
 <p>We can then continue with our analysis using the newly updated
 specific gravity values:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">example_data_results</span> <span class="op">&lt;-</span> <span class="va">example_data_sg_calc</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rowwise.html" class="external-link">rowwise</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>test <span class="op">=</span> <span class="fu"><a href="../reference/NPMScore.html">NPMScore</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/pick.html" class="external-link">pick</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>, sg_adjusted_label<span class="op">=</span><span class="st">"sg"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
@@ -228,7 +220,7 @@ specific gravity values:</p>
 <p>Our results table looks much the same as for previous examples, with
 the addition of the <code>custom_sg_adjusted</code> column to record
 where manual modification has occurred.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">example_data_results</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  [1] "name"                    "brand"                  </span></span>
 <span><span class="co">#&gt;  [3] "product_category"        "product_type"           </span></span>
@@ -267,7 +259,7 @@ where manual modification has occurred.</p>
 <h2 id="where-a-custom-conversion-factor-has-been-provided">Where a custom conversion factor has been provided<a class="anchor" aria-label="anchor" href="#where-a-custom-conversion-factor-has-been-provided"></a>
 </h2>
 <p>Again, we load the required libraries and data:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># load required libraries</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
@@ -278,7 +270,7 @@ where manual modification has occurred.</p>
 <p>This dataset has a column called <code>custom_sg_conversion</code>
 that is empty except for products where a custom specific gravity
 conversion factor has been provided.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">example_data_2</span></span>
 <span><span class="co">#&gt;                  name brand product_category product_type food_type</span></span>
 <span><span class="co">#&gt; 1              lembas    NA               NA         Food          </span></span>
@@ -359,7 +351,7 @@ conversion factor has been provided.</p>
 <span><span class="co">#&gt; 10                   NA</span></span></code></pre></div>
 <p>Now, we calculate specific gravities as usual, initially ignoring the
 custom values.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">example_data_sg_calc_2</span> <span class="op">&lt;-</span> <span class="va">example_data_2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rowwise.html" class="external-link">rowwise</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span> sg <span class="op">=</span> <span class="fu"><a href="../reference/SGConverter.html">SGConverter</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/pick.html" class="external-link">pick</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
@@ -373,7 +365,7 @@ means we need to calculate the adjusted specific gravity weight by
 adding the volume (ml) and the volume of water (ml) provided and using
 these as parameters along with our custom conversion factor in the
 <code><a href="../reference/generic_specific_gravity.html">generic_specific_gravity()</a></code> function.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="st">"Before setting custom values:"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "Before setting custom values:"</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">example_data_sg_calc_2</span><span class="op">$</span><span class="va">sg</span><span class="op">)</span></span>
@@ -405,7 +397,7 @@ these as parameters along with our custom conversion factor in the
 <span><span class="co">#&gt;  [1] 100.00 130.00 104.00 128.75 103.00 100.00  51.50  25.00  99.60 109.00</span></span></code></pre></div>
 <p>We can then continue with our analysis using the newly updated
 specific gravity values:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">example_data_results_2</span> <span class="op">&lt;-</span> <span class="va">example_data_sg_calc_2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rowwise.html" class="external-link">rowwise</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>test <span class="op">=</span> <span class="fu"><a href="../reference/NPMScore.html">NPMScore</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/pick.html" class="external-link">pick</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>, sg_adjusted_label<span class="op">=</span><span class="st">"sg"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
@@ -418,7 +410,7 @@ specific gravity values:</p>
 <p>Our results table looks much the same as for previous examples, with
 the addition of the <code>custom_sg_conversion</code> column to record
 where manual modification has occurred.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">example_data_results_2</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  [1] "name"                    "brand"                  </span></span>
 <span><span class="co">#&gt;  [3] "product_category"        "product_type"           </span></span>
